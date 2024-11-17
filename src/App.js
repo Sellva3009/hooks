@@ -1,23 +1,31 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
+import Counter from './Components/Counter';
 
 function App() {
+  let [counter, setCounter] = useState(0);
+  let [name, setName] = useState(true);
+  const [text, setText] = useState('');
+
+  console.log(text);
+  const handleIncrement = () => {
+    setCounter(++counter);
+    console.log('Incremented');
+    setName(!name);
+  }
+  const handleDecrement = () => {
+    setCounter(counter - 1);
+    console.log("Decremented");
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <input type="text" onChange={(e) => setText(e.target.value)} />
+      <p>{text}</p>
+      {name && <p>Selvaa</p>}
+      <Counter counter={counter} />
+      <button onClick={handleIncrement}>Increment</button>
+      <button onClick={handleDecrement}>Decrement</button>
     </div>
   );
 }
